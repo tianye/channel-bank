@@ -71,7 +71,7 @@ class Notify
         $notify = $this->request->query->all();
 
         //浦发回调以GET 方式 所以 空格 要换成 +
-        $notify = \GuzzleHttp\json_decode(str_replace(' ', '+', \GuzzleHttp\json_encode($notify, SON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)), true);
+        $notify = \GuzzleHttp\json_decode(str_replace(' ', '+', \GuzzleHttp\json_encode($notify, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)), true);
 
         if (!is_array($notify) || empty($notify)) {
             throw new FaultException('Invalid request query.', 400);
