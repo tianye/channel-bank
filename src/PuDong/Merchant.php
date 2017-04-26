@@ -25,15 +25,15 @@ class Merchant extends Attribute
      */
     protected $attributes = [
         'version',
-        'sign_type',
+        'signType',
         'charset',
-        'txn_dir',
-        'bus_icd',
-        'in_scd',
-        'mch_nt_id',
-        'terminal_id',
-        'fee_type',
-        'sign_key',
+        'txndir',
+        'busicd',
+        'inscd',
+        'mchntid',
+        'terminalid',
+        'currency',
+        'stringSignTemp',
     ];
 
     /**

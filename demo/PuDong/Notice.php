@@ -17,7 +17,7 @@ class Notice
             'debug' => true,
             'log'   => [
                 'level' => 'debug',
-                'file'  => '/tmp/ChannelBank.log',
+                'file'  => '/tmp/ChannelBank_PuDong_Notice.log',
             ],
 
             'spdb_payment' => [

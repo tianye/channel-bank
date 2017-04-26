@@ -15,7 +15,7 @@ class ApplicationDemo
             'debug' => true,
             'log'   => [
                 'level' => 'debug',
-                'file'  => '/tmp/ChannelBank.log',
+                'file'  => '/tmp/ChannelBank_PuDong.log',
             ],
 
             'spdb_payment' => [
@@ -76,8 +76,8 @@ class ApplicationDemo
             'chcd'      => $ch_cd, // 付渠道， 前 仅 持微信 付 和 付宝， WXP:微信  付，ALP: 付 宝
             'order_num' => $order_num,
             'tx_amt'    => $tx_amt,
-            'backUrl'   => 'http://242.itse.cc/PuDong/PuDongNotice.php?calback=backUrl',
-            'frontUrl'  => 'http://242.itse.cc/PuDong/PuDongNotice.php?calback=frontUrl',
+            'backUrl'   => 'http://242.itse.cc/PuDong/PuDong/Notice.php?callback=backUrl',
+            'frontUrl'  => 'http://242.itse.cc/PuDong/PuDong/Notice.php?callback=frontUrl',
         ];
 
         if (null === $attributes['order_num']) {
@@ -129,7 +129,7 @@ class ApplicationDemo
 
 $Application = new ApplicationDemo();
 
-$orig_order_num = '订单号';
+$orig_order_num = '1493109659157606005536';
 $order_num      = build_order_num();
 $scan_code_id   = '收款码号';
 

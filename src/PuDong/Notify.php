@@ -3,7 +3,6 @@ namespace ChannelBank\PuDong;
 
 use ChannelBank\Core\Exceptions\FaultException;
 use ChannelBank\Support\Collection;
-use ChannelBank\Support\XML;
 use Symfony\Component\HttpFoundation\Request;
 
 class Notify

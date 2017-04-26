@@ -54,6 +54,5 @@ class PuDongServiceProvider implements ServiceProviderInterface
         $pimple['spdb_payment'] = function ($pimple) {
             return new Payment($pimple['spdb_merchant']);
         };
-        //查询订单 退款 取消订单
     }
 }
