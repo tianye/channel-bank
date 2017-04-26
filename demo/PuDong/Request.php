@@ -4,7 +4,7 @@ require '../../vendor/autoload.php';
 use ChannelBank\Foundation\Application;
 use ChannelBank\PuDong\Order;
 
-class ApplicationDemo
+class Request
 {
 
     static $app;
@@ -127,7 +127,7 @@ class ApplicationDemo
     }
 }
 
-$Application = new ApplicationDemo();
+$Application = new Request();
 
 $orig_order_num = '1493109659157606005536';
 $order_num      = build_order_num();
