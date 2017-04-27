@@ -2,6 +2,7 @@
 namespace ChannelBank\PuDong;
 
 use ChannelBank\Core\Exceptions\FaultException;
+use ChannelBank\Core\Exceptions\HttpException;
 use Psr\Http\Message\ResponseInterface;
 use ChannelBank\Core\AbstractAPI;
 use ChannelBank\Support\Collection;
@@ -70,7 +71,7 @@ class API extends AbstractAPI
 
         $response = $this->getHttp()->request($api, $method, $options);
 
-        return $returnResponse ? $response : $this->parseResponse($response);
+        return $returnResponse || !$response ? $response : $this->parseResponse($response);
     }
 
     /**
@@ -95,7 +96,7 @@ class API extends AbstractAPI
 
         $params = array_filter($params);
 
-        $params['sign'] = generate_sign($params, $this->merchant->sign_key, $this->merchant->sign_type);
+        $params['sign'] = self::generate_sign($params, $this->merchant->sign_key, $this->merchant->sign_type);
 
         return $params;
     }
@@ -131,9 +132,19 @@ class API extends AbstractAPI
      */
     protected function isValid(Collection $response)
     {
-        $localSign = generate_sign($response->except('sign')->all(), $this->merchant->sign_key, 'SHA256');
+        $localSign = self::generate_sign($response->except('sign')->all(), $this->merchant->sign_key, 'SHA256');
 
         return $localSign === $response->get('sign');
+    }
+
+    public static function generate_sign(array $attributes, $key, $encryptMethod = 'SHA256')
+    {
+
+        ksort($attributes);
+
+        $str = urldecode(http_build_query($attributes)) . $key;
+
+        return strtolower(call_user_func_array($encryptMethod, [$str]));
     }
 
 }

@@ -200,7 +200,7 @@ class Http
      * @param string $method
      * @param array  $options
      *
-     * @return ResponseInterface
+     * @return ResponseInterface|bool
      *
      * @throws HttpException
      */
@@ -214,7 +214,18 @@ class Http
 
         $options['handler'] = $this->getHandler();
 
-        $response = $this->getClient()->request($method, $url, $options);
+        try {
+            $response = $this->getClient()->request($method, $url, $options);
+        } catch (\Exception $e) {
+
+            Log::debug('HTTP Exception:', [
+                'exception' => get_class($e),
+                'code'      => $e->getCode(),
+                'message'   => $e->getMessage(),
+            ]);
+
+            return false;
+        }
 
         Log::debug('API response:', [
             'Status'  => $response->getStatusCode(),

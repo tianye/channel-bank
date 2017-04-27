@@ -12,6 +12,7 @@ use ChannelBank\Support\Log;
  * Class Application
  *
  * @property \ChannelBank\PuDong\Payment $spdb_payment
+ * @property \ChannelBank\XinLan\Payment $xinlan_payment
  *
  * @package ChannelBank\Foundation
  */
@@ -19,6 +20,7 @@ class Application extends Container
 {
     protected $providers = [
         ServiceProviders\PuDongServiceProvider::class,
+        ServiceProviders\XinLanServiceProvider::class,
     ];
 
     /**

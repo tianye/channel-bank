@@ -1,26 +1,5 @@
 <?php
 
-/**
- * Generate a signature.
- *
- * @param array  $attributes
- * @param string $key
- * @param string $encryptMethod
- *
- * @return string
- */
-if (!function_exists('generate_sign')) {
-    function generate_sign(array $attributes, $key, $encryptMethod = 'SHA256')
-    {
-
-        ksort($attributes);
-
-        $str = urldecode(http_build_query($attributes)) . $key;
-
-        return strtolower(call_user_func_array($encryptMethod, [$str]));
-    }
-}
-
 if (!function_exists('SHA256')) {
     function SHA256($str)
     {
