@@ -2,8 +2,12 @@
 require '../../vendor/autoload.php';
 
 use ChannelBank\Foundation\Application;
+
 use ChannelBank\XinLan\Order;
 
+/**
+ * Class Request
+ */
 class Request
 {
 
@@ -52,6 +56,8 @@ class Request
 
     public function consumerShowCode($auth_code = '')
     {
+
+        //var_dump(Security::encrypt($auth_code, '6547c991e1747b3d793007d8e6debbae'));exit;
         $attributes = [
             'goods_name'    => 'Test',
             'order_amount'  => '1',

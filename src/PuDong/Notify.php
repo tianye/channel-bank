@@ -49,7 +49,7 @@ class Notify
     public function isValid()
     {
         //浦发回调 calback sign 字段不参与签名
-        $localSign = API::generate_sign($this->getNotify()->except(['calback', 'sign'])->all(), $this->merchant->sign_key, 'SHA256');
+        $localSign = API::generate_sign($this->getNotify()->except(['sign'])->all(), $this->merchant->sign_key, 'SHA256');
 
         return $localSign === $this->getNotify()->get('sign');
     }
