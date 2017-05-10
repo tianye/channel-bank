@@ -48,8 +48,13 @@ class Payment
             throw new FaultException('Invalid request payloads.', 400);
         }
 
-        $notify     = $notify->getNotify();
-        $successful = $notify->get('errorDetail') === 'SUCCESS';
+        $notify = $notify->getNotify();
+
+        if ($notify->get('errorDetail') === 'SUCCESS' && $notify->get('respcd') === '00') {
+            $successful = 'SUCCESS';
+        } else {
+            $successful = "FAIL";
+        }
 
         $handleResult = call_user_func_array($callback, [$notify, $successful]);
 
