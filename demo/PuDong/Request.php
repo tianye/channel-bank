@@ -59,6 +59,7 @@ class Request
             'chcd'      => 'WXP', //需要请求的渠道代码，例如需要请求支付宝则填写ALP，填写列表:ALP:支付宝，WXP: 微信，YZF:翼支付，QQP:qq钱包，京东钱包:JDP，百度钱包:BDP，YDP:移动和 包，YLP:银联钱包
             'order_num' => $order_num,
             'tx_amt'    => $tx_amt,
+            'backUrl'   => 'http://242.itse.cc/PuDong/PuDong/Notice.php',
         ];
         $order      = new Order($attributes);
 
@@ -95,7 +96,7 @@ class Request
 
     public function query($orig_order_num = null)
     {
-        $return = self::$app->spdb_payment->Query()->get($orig_order_num);
+        $return = self::$app->spdb_payment->query()->get($orig_order_num);
 
         var_dump($return);
         exit;
@@ -112,7 +113,7 @@ class Request
 
     public function abolish($orig_order_num = '', $order_num = '')
     {
-        $return = self::$app->spdb_payment->Cancel()->abolish($orig_order_num, $order_num);
+        $return = self::$app->spdb_payment->cancel()->abolish($orig_order_num, $order_num);
 
         var_dump($return);
         exit;

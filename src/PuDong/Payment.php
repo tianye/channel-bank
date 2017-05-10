@@ -110,7 +110,7 @@ class Payment
     /**
      * @return \ChannelBank\PuDong\Pay\Query
      */
-    public function Query()
+    public function query()
     {
         return new Query($this->merchant);
     }
@@ -118,7 +118,7 @@ class Payment
     /**
      * @return \ChannelBank\PuDong\Pay\Cancel
      */
-    public function Cancel()
+    public function cancel()
     {
         return new Cancel($this->merchant);
     }
