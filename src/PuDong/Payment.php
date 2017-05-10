@@ -50,7 +50,7 @@ class Payment
 
         $notify = $notify->getNotify();
 
-        if ($notify->get('errorDetail') === 'SUCCESS' && $notify->get('respcd') === '00') {
+        if ($notify->get('respcd') === '00') {
             $successful = 'SUCCESS';
         } else {
             $successful = "FAIL";
