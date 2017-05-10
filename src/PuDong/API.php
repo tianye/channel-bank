@@ -17,8 +17,11 @@ class API extends AbstractAPI
     protected $merchant;
 
     //api
-    const API_PAY_ORDER = 'http://test.quick.ipay.so/scanpay/unified';
-    const PAY_URL       = 'http://test.quick.ipay.so/scanpay/unified?data=';
+    const API_PAY_ORDER = 'https://showmoney.cn/scanpay/unified';
+    const PAY_URL       = 'https://showmoney.cn/scanpay/unified?data=';
+
+    #const API_PAY_ORDER = 'http://test.quick.ipay.so/scanpay/unified';
+    #const PAY_URL       = 'http://test.quick.ipay.so/scanpay/unified?data=';
 
     const BUSICD_FAST    = 'PURC';
     const BUSICD_QR_CODE = 'PAUT';
