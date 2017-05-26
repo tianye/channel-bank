@@ -90,8 +90,8 @@ abstract class AbstractAPI
     {
         $uniqid = uniqid();
         // log
-        //$this->http->addMiddleware($this->logMiddleware($uniqid));
-        //$this->http->addMiddleware($this->logMiddlewareResponse($uniqid));
+        $this->http->addMiddleware($this->logMiddleware($uniqid));
+        $this->http->addMiddleware($this->logMiddlewareResponse($uniqid));
     }
 
     /**
