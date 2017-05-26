@@ -2,7 +2,6 @@
 namespace ChannelBank\PuDong;
 
 use ChannelBank\Core\Exceptions\FaultException;
-use ChannelBank\Core\Exceptions\HttpException;
 use Psr\Http\Message\ResponseInterface;
 use ChannelBank\Core\AbstractAPI;
 use ChannelBank\Support\Collection;

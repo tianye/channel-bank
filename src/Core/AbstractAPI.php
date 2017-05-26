@@ -7,6 +7,7 @@ use ChannelBank\Support\Collection;
 use ChannelBank\Support\Log;
 use GuzzleHttp\Middleware;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class AbstractAPI.
@@ -87,8 +88,10 @@ abstract class AbstractAPI
      */
     protected function registerHttpMiddlewares()
     {
+        $uniqid = uniqid();
         // log
-        $this->http->addMiddleware($this->logMiddleware());
+        //$this->http->addMiddleware($this->logMiddleware($uniqid));
+        //$this->http->addMiddleware($this->logMiddlewareResponse($uniqid));
     }
 
     /**
@@ -96,11 +99,21 @@ abstract class AbstractAPI
      *
      * @return \Closure
      */
-    protected function logMiddleware()
+    protected function logMiddleware($uniqid)
     {
-        return Middleware::tap(function (RequestInterface $request, $options) {
-            Log::debug("Request: {$request->getMethod()} {$request->getUri()} " . json_encode($options));
-            Log::debug('Request headers:' . json_encode($request->getHeaders()));
+        return Middleware::tap(function (RequestInterface $request, $options) use ($uniqid) {
+            Log::debug('Guzzle Request', ['uniquid' => $uniqid, 'Method' => $request->getMethod(), 'Url' => $request->getUri(), 'Options' => json_encode($options), 'Body' => strval($request->getBody()), 'Headers' . json_encode($request->getHeaders())]);
+
+            return $request;
+        });
+    }
+
+    protected function logMiddlewareResponse($uniqid)
+    {
+        return Middleware::mapResponse(function (ResponseInterface $response) use ($uniqid) {
+            Log::debug('Guzzle Response', ['uniquid' => $uniqid, 'Code' => $response->getStatusCode(), 'Body' => $response->getBody(), 'Headers' => json_encode($response->getHeaders())]);
+
+            return $response;
         });
     }
 
