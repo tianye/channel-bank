@@ -102,7 +102,7 @@ abstract class AbstractAPI
     protected function logMiddleware($uniqid)
     {
         return Middleware::tap(function (RequestInterface $request, $options) use ($uniqid) {
-            Log::debug('Guzzle Request', ['uniquid' => $uniqid, 'Method' => $request->getMethod(), 'Url' => $request->getUri(), 'Options' => json_encode($options), 'Body' => strval($request->getBody()), 'Headers' . json_encode($request->getHeaders())]);
+            Log::debug('Guzzle Request', ['uniquid' => $uniqid, 'method' => $request->getMethod(), 'url' => $request->getUri()->__toString(), 'options' => json_encode($options), 'body' => strval($request->getBody()), 'headers' => json_encode($request->getHeaders())]);
 
             return $request;
         });
@@ -111,7 +111,7 @@ abstract class AbstractAPI
     protected function logMiddlewareResponse($uniqid)
     {
         return Middleware::mapResponse(function (ResponseInterface $response) use ($uniqid) {
-            Log::debug('Guzzle Response', ['uniquid' => $uniqid, 'Code' => $response->getStatusCode(), 'Body' => $response->getBody(), 'Headers' => json_encode($response->getHeaders())]);
+            Log::debug('Guzzle Response', ['uniquid' => $uniqid, 'code' => $response->getStatusCode(), 'body' => $response->getBody(), 'headers' => json_encode($response->getHeaders())]);
 
             return $response;
         });
