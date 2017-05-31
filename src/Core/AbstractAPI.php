@@ -25,6 +25,8 @@ abstract class AbstractAPI
     const POST = 'post';
     const JSON = 'json';
 
+    static $guzzle_log = [];
+
     /**
      * AbstractAPI constructor.
      */
@@ -90,7 +92,7 @@ abstract class AbstractAPI
     {
         $uniqid = uniqid();
         // log
-        $this->http->addMiddleware($this->logMiddleware($uniqid));
+        //$this->http->addMiddleware($this->logMiddleware($uniqid));
         $this->http->addMiddleware($this->logMiddlewareResponse($uniqid));
     }
 
@@ -102,7 +104,7 @@ abstract class AbstractAPI
     protected function logMiddleware($uniqid)
     {
         return Middleware::tap(function (RequestInterface $request, $options) use ($uniqid) {
-            Log::debug('Guzzle Request', ['uniquid' => $uniqid, 'method' => $request->getMethod(), 'url' => $request->getUri()->__toString(), 'options' => json_encode($options), 'body' => strval($request->getBody()), 'headers' => json_encode($request->getHeaders())]);
+            self::$guzzle_log['request'] = ['method' => $request->getMethod(), 'url' => $request->getUri()->__toString(), 'options' => json_encode($options), 'body' => strval($request->getBody()), 'headers' => json_encode($request->getHeaders())];
 
             return $request;
         });
@@ -111,7 +113,9 @@ abstract class AbstractAPI
     protected function logMiddlewareResponse($uniqid)
     {
         return Middleware::mapResponse(function (ResponseInterface $response) use ($uniqid) {
-            Log::debug('Guzzle Response', ['uniquid' => $uniqid, 'code' => $response->getStatusCode(), 'body' => $response->getBody(), 'headers' => json_encode($response->getHeaders())]);
+            self::$guzzle_log['response'] = ['code' => $response->getStatusCode(), 'body' => $response->getBody()->__toString(), 'headers' => json_encode($response->getHeaders())];
+
+            Log::debug('Channel-Bank', self::$guzzle_log);
 
             return $response;
         });
