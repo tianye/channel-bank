@@ -1,4 +1,5 @@
 <?php
+
 namespace ChannelBank\PuDong;
 
 use ChannelBank\Core\Exceptions\FaultException;
@@ -49,7 +50,7 @@ class Notify
     public function isValid()
     {
         //浦发回调 calback sign 字段不参与签名
-        $localSign = API::generate_sign($this->getNotify()->except(['sign'])->all(), $this->merchant->sign_key, 'SHA256');
+        $localSign = API::generate_sign($this->getNotify()->except(['sign', 's'])->all(), $this->merchant->sign_key, 'SHA256');
 
         return $localSign === $this->getNotify()->get('sign');
     }
