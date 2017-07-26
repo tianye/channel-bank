@@ -1,4 +1,5 @@
 <?php
+
 namespace ChannelBank\Foundation;
 
 use Monolog\Handler\HandlerInterface;
@@ -11,8 +12,9 @@ use ChannelBank\Support\Log;
 /**
  * Class Application
  *
- * @property \ChannelBank\PuDong\Payment $spdb_payment
- * @property \ChannelBank\XinLan\Payment $xinlan_payment
+ * @property \ChannelBank\PuDong\Payment   $spdb_payment
+ * @property \ChannelBank\XinLan\Payment   $xinlan_payment
+ * @property \ChannelBank\MinSheng\Payment $minsheng_payment
  *
  * @package ChannelBank\Foundation
  */
@@ -21,6 +23,7 @@ class Application extends Container
     protected $providers = [
         ServiceProviders\PuDongServiceProvider::class,
         ServiceProviders\XinLanServiceProvider::class,
+        ServiceProviders\MinShengServiceProvider::class,
     ];
 
     /**
