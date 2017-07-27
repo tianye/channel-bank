@@ -19,7 +19,7 @@ class JsPay extends API
         $order->with('trans_id', self::JSPAY_TRANS_ID);
         $order->with('mch_no', $this->merchant->mch_no);
 
-        return parent::pay($order);
+        return $this->fieldChange(parent::pay($order));
     }
 
     public function AliJsPay(Order $order)
@@ -29,6 +29,15 @@ class JsPay extends API
         $order->with('trans_id', self::JSPAY_TRANS_ID);
         $order->with('mch_no', $this->merchant->mch_no);
 
-        return parent::pay($order);
+        return $this->fieldChange(parent::pay($order));
+    }
+
+    public function fieldChange($order)
+    {
+        if (!$order) {
+            return false;
+        }
+
+        return $order;
     }
 }

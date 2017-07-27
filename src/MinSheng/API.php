@@ -66,7 +66,6 @@ class API extends AbstractAPI
     {
         $params = $this->params($params);
 
-        var_dump($params);
         $options = array_merge([
             'form_params' => $params,
         ], $options);
