@@ -20,9 +20,9 @@ class Request
 
             'spdb_payment' => [
                 'in_scd'      => '10134001',
-                'mch_nt_id'   => '100000000000203',
-                'terminal_id' => 'tywx0001',
-                'sign_key'    => 'zsdfyreuoyamdphhaweyrjbvzkgfdycs',
+                'mch_nt_id'   => '210100073720001',
+                'terminal_id' => 'tianye-test2',
+                'sign_key'    => '2aacd3334d6a4bd1ea934675c735e56e',
             ],
         ];
 
@@ -130,12 +130,12 @@ class Request
 
 $Application = new Request();
 
-$orig_order_num = '1493109659157606005536';
+$orig_order_num = '1507340597768506006555';
 $order_num      = build_order_num();
 $scan_code_id   = '收款码号';
 
 //金额
-$tx_amt = '000000000010';
+$tx_amt = '000001000000';
 
 var_dump($order_num);
 //扫码收款
@@ -151,4 +151,4 @@ var_dump($order_num);
 //取消订单
 #$Application->abolish($orig_order_num, $order_num);
 //退款
-#$Application->refund($tx_amt, $orig_order_num, $order_num);
+$Application->refund($tx_amt, $orig_order_num, $order_num);

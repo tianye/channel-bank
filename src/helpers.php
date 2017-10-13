@@ -65,3 +65,18 @@ if (!function_exists('build_order_num')) {
         return $orderNum;
     }
 }
+
+if (!function_exists('array_only')) {
+    /**
+     * Get a subset of the items from the given array.
+     *
+     * @param  array        $array
+     * @param  array|string $keys
+     *
+     * @return array
+     */
+    function array_only($array, $keys)
+    {
+        return ChannelBank\Support\Arr::only($array, $keys);
+    }
+}

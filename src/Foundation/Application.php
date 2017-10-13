@@ -15,6 +15,7 @@ use ChannelBank\Support\Log;
  * @property \ChannelBank\PuDong\Payment   $spdb_payment
  * @property \ChannelBank\XinLan\Payment   $xinlan_payment
  * @property \ChannelBank\MinSheng\Payment $minsheng_payment
+ * @property \ChannelBank\JianShe\Payment  $ccb_payment
  *
  * @package ChannelBank\Foundation
  */
@@ -24,6 +25,7 @@ class Application extends Container
         ServiceProviders\PuDongServiceProvider::class,
         ServiceProviders\XinLanServiceProvider::class,
         ServiceProviders\MinShengServiceProvider::class,
+        ServiceProviders\JianSheServiceProvider::class,
     ];
 
     /**
