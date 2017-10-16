@@ -9,6 +9,8 @@ use ChannelBank\Support\XML;
 class Query extends API
 {
     /**
+     * 查询支付订单
+     *
      * @param \ChannelBank\JianShe\Order $order
      *
      * @return \ChannelBank\JianShe\Order
@@ -46,6 +48,8 @@ class Query extends API
     }
 
     /**
+     * 查询退款订单
+     *
      * @param \ChannelBank\JianShe\Order $order
      *
      * @return \ChannelBank\JianShe\Order

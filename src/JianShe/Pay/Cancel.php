@@ -12,6 +12,10 @@ class Cancel extends API
     /**
      * 关闭
      *
+     * @param \ChannelBank\JianShe\Order $order
+     *
+     * @return \ChannelBank\JianShe\Order
+     * @throws \Exception
      */
     public function repeal(Order $order)
     {
@@ -43,6 +47,10 @@ class Cancel extends API
     /**
      * 退款
      *
+     * @param \ChannelBank\JianShe\Order $order
+     *
+     * @return \ChannelBank\JianShe\Order
+     * @throws \Exception
      */
     public function refund(Order $order)
     {

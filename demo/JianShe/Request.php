@@ -183,7 +183,8 @@ $order_num      = build_order_num();
 $scan_code_id   = '收款码号';
 $order_amount   = '2';
 
-#var_dump($order_num);
+var_dump($order_num);
+
 #$Application->wxPay($order_num, $order_amount);
 
 #$Application->wxQrPay($order_num, $order_amount);
@@ -195,17 +196,17 @@ $order_amount   = '2';
 #$order_num = '1508141492285596002438';
 #$Application->query($order_num);
 
-#$orderNumber  = '1508141492285596002438';
-#$qid          = 'J014312017101616113291237602';
-#$order_amount = '1';
-#$Application->refund($order_num, $qid, $order_amount);
+$orderNumber  = '1508147957729848008837';
+$qid          = 'J014402017101617591841571656';
+$order_amount = '2';
+$Application->refund($order_num, $qid, $order_amount);
 
 #$ref_id      = 'T002402017101616212883001449';
 #$Application->refundQuery($ref_id);
 
-$order_number   = $order_num;
-$mer_order_id   = '1508141492285596002438';
-$qid            = 'J014312017101616113291237602';
-$bank_number    = '991';
-$mer_reserved_1 = '电子类消费产品';
-$Application->repeal($order_number, $mer_order_id, $qid, $bank_number, $mer_reserved_1);
+//$order_number   = $order_num;
+//$mer_order_id   = '1508141492285596002438';
+//$qid            = 'J014312017101616113291237602';
+//$bank_number    = '991';
+//$mer_reserved_1 = '电子类消费产品';
+//$Application->repeal($order_number, $mer_order_id, $qid, $bank_number, $mer_reserved_1);

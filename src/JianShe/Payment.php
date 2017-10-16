@@ -43,16 +43,31 @@ class Payment
     {
     }
 
+    /**
+     * 支付
+     *
+     * @return \ChannelBank\JianShe\Pay\JsPay
+     */
     public function JsPay()
     {
         return new JsPay($this->merchant);
     }
 
+    /**
+     * 查询
+     *
+     * @return \ChannelBank\JianShe\Pay\Query
+     */
     public function Query()
     {
         return new Query($this->merchant);
     }
 
+    /**
+     * 撤销
+     *
+     * @return \ChannelBank\JianShe\Pay\Cancel
+     */
     public function Cancel()
     {
         return new Cancel($this->merchant);

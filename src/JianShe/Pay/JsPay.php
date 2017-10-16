@@ -9,7 +9,13 @@ use ChannelBank\Support\FromMatching;
 class JsPay extends API
 {
 
-    //微信H5支付
+    /**
+     * 微信H5支付
+     *
+     * @param \ChannelBank\JianShe\Order $order
+     *
+     * @return \ChannelBank\JianShe\Order
+     */
     public function wxPay(Order $order)
     {
         $attributes = [
@@ -52,7 +58,13 @@ class JsPay extends API
         return new Order($response_array);
     }
 
-    //微信二维码支付
+    /**
+     * 微信二维码支付
+     *
+     * @param \ChannelBank\JianShe\Order $order
+     *
+     * @return \ChannelBank\JianShe\Order
+     */
     public function wxQrPay(Order $order)
     {
         $attributes = [
@@ -79,7 +91,13 @@ class JsPay extends API
         return new Order($arr);
     }
 
-    //支付宝H5支付
+    /**
+     * 支付宝H5支付
+     *
+     * @param \ChannelBank\JianShe\Order $order
+     *
+     * @return \ChannelBank\JianShe\Order
+     */
     public function aliPay(Order $order)
     {
         $attributes = [
@@ -120,7 +138,13 @@ HTML;
         return new Order($data);
     }
 
-    //支付宝二维码支付
+    /**
+     * 支付宝二维码支付
+     *
+     * @param \ChannelBank\JianShe\Order $order
+     *
+     * @return \ChannelBank\JianShe\Order
+     */
     public function aliQrPay(Order $order)
     {
         $attributes = [
