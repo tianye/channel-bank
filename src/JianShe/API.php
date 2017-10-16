@@ -106,6 +106,19 @@ class API extends AbstractAPI
      *
      * @return bool
      */
+    protected function isValid(Collection $response)
+    {
+        $localSign = self::generate_sign($response->except('sign')->all(), $this->merchant->sign_key, 'MD5');
+
+        return $localSign === $response->get('sign');
+    }
+
+    /**
+     * @param $xml
+     * @param $sign
+     *
+     * @return bool
+     */
     protected function isXmlValid($xml, $sign)
     {
         $localSign = self::generate_xml_sign($xml, $this->merchant->sign_key, 'MD5');

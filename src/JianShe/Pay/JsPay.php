@@ -16,7 +16,7 @@ class JsPay extends API
             'version'           => Order::PAY_VERSION,
             'charset'           => Order::CHARSET,
             'signMethod'        => Order::SIGNMETHOD,
-            'payType'           => 'B2C',
+            'payType'           => Order::PAY_TYPE_B2C,
             'transType'         => Order::PAY_TRANSTYPE,
             'merId'             => $this->merchant->mer_id,
             'orderTime'         => date('YmdHis', time()),
@@ -49,7 +49,7 @@ class JsPay extends API
         }
 
         //--------------------------------------------------------------------------------------------------------------------------------------------
-        return $response_array;
+        return new Order($response_array);
     }
 
     //微信二维码支付
@@ -59,7 +59,7 @@ class JsPay extends API
             'version'           => Order::PAY_VERSION,
             'charset'           => Order::CHARSET,
             'signMethod'        => Order::SIGNMETHOD,
-            'payType'           => 'B2C',
+            'payType'           => Order::PAY_TYPE_B2C,
             'transType'         => Order::PAY_TRANSTYPE,
             'merId'             => $this->merchant->mer_id,
             'orderTime'         => date('YmdHis', time()),
@@ -76,7 +76,7 @@ class JsPay extends API
 
         parse_str($subject, $arr);
 
-        return $arr;
+        return new Order($arr);
     }
 
     //支付宝H5支付
@@ -86,7 +86,7 @@ class JsPay extends API
             'version'           => Order::PAY_VERSION,
             'charset'           => Order::CHARSET,
             'signMethod'        => Order::SIGNMETHOD,
-            'payType'           => 'B2C',
+            'payType'           => Order::PAY_TYPE_B2C,
             'transType'         => Order::PAY_TRANSTYPE,
             'merId'             => '10001',
             'orderTime'         => date('YmdHis', time()),
@@ -117,7 +117,7 @@ HTML;
 
         $data = ['pay_info' => $from_array, 'pay_html' => $editorSrc];
 
-        return $data;
+        return new Order($data);
     }
 
     //支付宝二维码支付
@@ -127,7 +127,7 @@ HTML;
             'version'           => Order::PAY_VERSION,
             'charset'           => Order::CHARSET,
             'signMethod'        => Order::SIGNMETHOD,
-            'payType'           => 'B2C',
+            'payType'           => Order::PAY_TYPE_B2C,
             'transType'         => Order::PAY_TRANSTYPE,
             'merId'             => $this->merchant->mer_id,
             'orderTime'         => date('YmdHis', time()),
@@ -144,6 +144,6 @@ HTML;
 
         parse_str($subject, $arr);
 
-        return $arr;
+        return new Order($arr);
     }
 }

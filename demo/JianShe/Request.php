@@ -27,10 +27,7 @@ class Request
         self::$app = new Application($options);
     }
 
-    /**
-     * @param        $order_num
-     * @param string $order_amount
-     */
+    //微信H5支付
     public function wxPay($order_num, $order_amount = '1')
     {
         $attributes = [
@@ -51,6 +48,7 @@ class Request
         var_export($return);
     }
 
+    //微信二维码支付
     public function wxQrPay($order_num, $order_amount = '1')
     {
         $attributes = [
@@ -71,6 +69,7 @@ class Request
         var_export($return);
     }
 
+    //支付宝H5支付
     public function aliPay($order_num, $order_amount = '1')
     {
         $attributes = [
@@ -91,6 +90,7 @@ class Request
         var_export($return);
     }
 
+    //支付宝二维码支付
     public function aliQrPay($order_num, $order_amount = '1')
     {
         $attributes = [
@@ -111,6 +111,7 @@ class Request
         var_export($return);
     }
 
+    //查询
     public function query($order_num)
     {
         $attributes = [
@@ -124,6 +125,37 @@ class Request
         var_export($return);
     }
 
+    //退款
+    public function refund($order_num, $qid, $ref_amount)
+    {
+        $attributes = [
+            'order_number'   => $order_num,
+            'qid'            => $qid,
+            'ref_amount'     => $ref_amount,
+            'mer_reserved_1' => '商户退款示例',
+            'back_end_url'   => 'http://test.itse.cc/Bank/notify.php',
+            #'refSplitAmount' => ',
+        ];
+        $order      = new Order($attributes);
+
+        $return = self::$app->ccb_payment->Cancel()->refund($order);
+
+        var_export($return);
+    }
+
+    //退款查询
+    public function refundQuery($ref_id)
+    {
+        $attributes = [
+            'ref_id' => $ref_id,
+        ];
+        $order      = new Order($attributes);
+
+        $return = self::$app->ccb_payment->Query()->refundQuery($order);
+
+        var_export($return);
+    }
+
 }
 
 $Application = new Request();
@@ -133,8 +165,7 @@ $order_num      = build_order_num();
 $scan_code_id   = '收款码号';
 $order_amount   = '2';
 
-var_dump($order_num);
-
+#var_dump($order_num);
 #$Application->wxPay($order_num, $order_amount);
 
 #$Application->wxQrPay($order_num, $order_amount);
@@ -143,5 +174,13 @@ var_dump($order_num);
 
 #$Application->aliQrPay($order_num, $order_amount);
 
-$order_num = '1508136540525672003928';
-$Application->query($order_num);
+#$order_num = '1508141492285596002438';
+#$Application->query($order_num);
+
+#$orderNumber  = '1508141492285596002438';
+#$qid          = 'J014312017101616113291237602';
+#$order_amount = '1';
+#$Application->refund($order_num, $qid, $order_amount);
+
+#$ref_id      = 'T002402017101616212883001449';
+#$Application->refundQuery($ref_id);

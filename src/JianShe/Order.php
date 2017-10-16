@@ -31,9 +31,12 @@ class Order extends Attribute
     const QUE_VERSION   = "2.0";    // 查询版本
     const PAY_TRANSTYPE = "01";     // 01-消费交易
 
+    const PAY_TYPE_B2C = 'B2C';
+
     const REF_PAY_VERSION = "2.0";   // 退款版本
     const REF_QUE_VERSION = "2.0";   // 退款查询版本
     const REF_TRANSTYPE   = "02";    // 02-退款交易
+    const REF_SERVICE_ID  = '0';     // 退款SERVICE ID
 
     const BILL_DOWNLOAD_VERSION     = "2.0";     // 下载版本
     const BILL_DOWNLOAD_TRANSCODE01 = "F001";    // F001-对账单生成
@@ -65,6 +68,10 @@ class Order extends Attribute
         'orderCurrency',
         'defaultBankNumber',
         'scence',
+        'refAmount',
+        'refSplitAmount',
+        'refId',
+        'serviceId',
     ];
 
     /**
@@ -93,6 +100,10 @@ class Order extends Attribute
         'orderCurrency'     => 'order_currency',
         'defaultBankNumber' => 'default_bank_number',
         'scence'            => 'scence',
+        'refAmount'         => 'ref_amount',
+        'refSplitAmount'    => 'ref_split_amount',
+        'refId'             => 'ref_id',
+        'serviceId'         => 'service_id',
     ];
 
     /**
