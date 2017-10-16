@@ -31,11 +31,11 @@ class Request
      * @param        $order_num
      * @param string $order_amount
      */
-    public function fastPayment($order_num, $order_amount = '1')
+    public function wxPay($order_num, $order_amount = '1')
     {
         $attributes = [
-            'back_end_url'   => 'http://test.itse.cc',
-            'front_end_url'  => 'http://test.itse.cc',
+            'back_end_url'   => 'http://test.itse.cc/Bank/notify.php',
+            'front_end_url'  => 'http://test.itse.cc/Bank/notify.php',
             'order_number'   => $order_num,
             'order_amount'   => $order_amount,
             'customer_ip'    => '127.0.0.1',
@@ -46,12 +46,12 @@ class Request
         ];
         $order      = new Order($attributes);
 
-        $return = self::$app->ccb_payment->JsPay()->pay($order);
+        $return = self::$app->ccb_payment->JsPay()->wxPay($order);
 
         var_export($return);
     }
 
-    public function qrPay($order_num, $order_amount = '1')
+    public function wxQrPay($order_num, $order_amount = '1')
     {
         $attributes = [
             'back_end_url'   => 'http://test.itse.cc',
@@ -66,7 +66,60 @@ class Request
         ];
         $order      = new Order($attributes);
 
-        $return = self::$app->ccb_payment->JsPay()->qrPay($order);
+        $return = self::$app->ccb_payment->JsPay()->wxQrPay($order);
+
+        var_export($return);
+    }
+
+    public function aliPay($order_num, $order_amount = '1')
+    {
+        $attributes = [
+            'back_end_url'   => 'http://test.itse.cc/Bank/notify.php',
+            'front_end_url'  => 'http://test.itse.cc/Bank/notify.php',
+            'order_number'   => $order_num,
+            'order_amount'   => $order_amount,
+            'customer_ip'    => '127.0.0.1',
+            'mer_reserved_1' => '',
+            'mer_reserved_2' => '',
+            'mer_reserved_3' => '',
+            'order_desc'     => 'orderDesc',
+        ];
+        $order      = new Order($attributes);
+
+        $return = self::$app->ccb_payment->JsPay()->aliPay($order);
+
+        var_export($return);
+    }
+
+    public function aliQrPay($order_num, $order_amount = '1')
+    {
+        $attributes = [
+            'back_end_url'   => 'http://test.itse.cc/Bank/notify.php',
+            'front_end_url'  => 'http://test.itse.cc/Bank/notify.php',
+            'order_number'   => $order_num,
+            'order_amount'   => $order_amount,
+            'customer_ip'    => '127.0.0.1',
+            'mer_reserved_1' => '',
+            'mer_reserved_2' => '',
+            'mer_reserved_3' => '',
+            'order_desc'     => 'orderDesc',
+        ];
+        $order      = new Order($attributes);
+
+        $return = self::$app->ccb_payment->JsPay()->aliQrPay($order);
+
+        var_export($return);
+    }
+
+    public function query($order_num)
+    {
+        $attributes = [
+            'order_number' => $order_num,
+            //'qid'         => '',
+        ];
+        $order      = new Order($attributes);
+
+        $return = self::$app->ccb_payment->Query()->query($order);
 
         var_export($return);
     }
@@ -78,12 +131,17 @@ $Application = new Request();
 $orig_order_num = '1493109659157606005536';
 $order_num      = build_order_num();
 $scan_code_id   = '收款码号';
-$order_amount   = '1';
+$order_amount   = '2';
 
 var_dump($order_num);
 
-$Application->fastPayment($order_num, $order_amount);
+#$Application->wxPay($order_num, $order_amount);
 
-#$Application->qrPay($order_num, $order_amount);
+#$Application->wxQrPay($order_num, $order_amount);
 
+#$Application->aliPay($order_num, $order_amount);
 
+#$Application->aliQrPay($order_num, $order_amount);
+
+$order_num = '1508136540525672003928';
+$Application->query($order_num);

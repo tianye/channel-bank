@@ -5,6 +5,7 @@ namespace ChannelBank\JianShe;
 use ChannelBank\Core\Exceptions\FaultException;
 use ChannelBank\JianShe\API;
 use ChannelBank\JianShe\Pay\JsPay;
+use ChannelBank\JianShe\Pay\Query;
 use Symfony\Component\HttpFoundation\Response;
 
 class Payment
@@ -44,5 +45,10 @@ class Payment
     public function JsPay()
     {
         return new JsPay($this->merchant);
+    }
+
+    public function Query()
+    {
+        return new Query($this->merchant);
     }
 }

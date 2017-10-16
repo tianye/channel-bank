@@ -106,19 +106,27 @@ class API extends AbstractAPI
      *
      * @return bool
      */
-    protected function isValid(Collection $response)
+    protected function isXmlValid($xml, $sign)
     {
+        $localSign = self::generate_xml_sign($xml, $this->merchant->sign_key, 'MD5');
+
+        return $localSign === $sign;
     }
 
-    public static function generate_sign(array $attributes, $key, $encryptMethod = 'SHA256')
+    public static function generate_sign(array $attributes, $key, $encryptMethod = 'MD5')
     {
         ksort($attributes);
 
-        $str = urldecode(http_build_query($attributes));
+        $str = urldecode(http_build_query($attributes)) . '&' . $encryptMethod($key);
 
-        $str = $str . '&' . $encryptMethod($key);
+        return strtolower(call_user_func_array($encryptMethod, [$str]));
+    }
 
-        return $encryptMethod($str);
+    public static function generate_xml_sign($xml, $key, $encryptMethod = 'MD5')
+    {
+        $str = $xml . '&' . $encryptMethod($key);
+
+        return strtolower(call_user_func_array($encryptMethod, [$str]));
     }
 
 }

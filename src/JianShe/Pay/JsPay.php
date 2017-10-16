@@ -4,11 +4,13 @@ namespace ChannelBank\JianShe\Pay;
 
 use ChannelBank\JianShe\API;
 use ChannelBank\JianShe\Order;
+use ChannelBank\Support\FromMatching;
 
 class JsPay extends API
 {
 
-    public function pay(Order $order)
+    //微信H5支付
+    public function wxPay(Order $order)
     {
         $attributes = [
             'version'           => Order::PAY_VERSION,
@@ -16,7 +18,7 @@ class JsPay extends API
             'signMethod'        => Order::SIGNMETHOD,
             'payType'           => 'B2C',
             'transType'         => Order::PAY_TRANSTYPE,
-            'merId'             => '10001',
+            'merId'             => $this->merchant->mer_id,
             'orderTime'         => date('YmdHis', time()),
             'orderCurrency'     => Order::ORDERCURRENCY,
             'defaultBankNumber' => '991',
@@ -50,7 +52,8 @@ class JsPay extends API
         return $response_array;
     }
 
-    public function qrPay(Order $order)
+    //微信二维码支付
+    public function wxQrPay(Order $order)
     {
         $attributes = [
             'version'           => Order::PAY_VERSION,
@@ -63,6 +66,74 @@ class JsPay extends API
             'orderCurrency'     => Order::ORDERCURRENCY,
             'defaultBankNumber' => '991',
             'scence'            => 'WECHAT_QR',
+        ];
+
+        foreach ($attributes as $key => $value) {
+            $order->set($key, $value);
+        }
+
+        $subject = parent::request(parent::JSPT_PAY_URL, $order->all());
+
+        parse_str($subject, $arr);
+
+        return $arr;
+    }
+
+    //支付宝H5支付
+    public function aliPay(Order $order)
+    {
+        $attributes = [
+            'version'           => Order::PAY_VERSION,
+            'charset'           => Order::CHARSET,
+            'signMethod'        => Order::SIGNMETHOD,
+            'payType'           => 'B2C',
+            'transType'         => Order::PAY_TRANSTYPE,
+            'merId'             => '10001',
+            'orderTime'         => date('YmdHis', time()),
+            'orderCurrency'     => Order::ORDERCURRENCY,
+            'defaultBankNumber' => '992',
+        ];
+
+        foreach ($attributes as $key => $value) {
+            $order->set($key, $value);
+        }
+
+        $subject = parent::request(parent::JSPT_PAY_URL, $order->all());
+
+        $from_array = FromMatching::get_page_form_data($subject);
+
+        $params = parent::params($order->all());
+
+        $pay_url = parent::JSPT_PAY_URL;
+
+        $html = '';
+        foreach ($params as $key => $value) {
+            $html .= '<input type="hidden" name="' . $key . '" value="' . $value . '"/>';
+        }
+
+        $editorSrc = <<<HTML
+<form id="alipaysubmit"  name="alipaysubmit" action="$pay_url" method="post">$html<input type="submit" value="确认" style="display:none;"></form><script>document.forms['alipaysubmit'].submit();</script>
+HTML;
+
+        $data = ['pay_info' => $from_array, 'pay_html' => $editorSrc];
+
+        return $data;
+    }
+
+    //支付宝二维码支付
+    public function aliQrPay(Order $order)
+    {
+        $attributes = [
+            'version'           => Order::PAY_VERSION,
+            'charset'           => Order::CHARSET,
+            'signMethod'        => Order::SIGNMETHOD,
+            'payType'           => 'B2C',
+            'transType'         => Order::PAY_TRANSTYPE,
+            'merId'             => $this->merchant->mer_id,
+            'orderTime'         => date('YmdHis', time()),
+            'orderCurrency'     => Order::ORDERCURRENCY,
+            'defaultBankNumber' => '992',
+            'scence'            => 'ALIPAY_QR',
         ];
 
         foreach ($attributes as $key => $value) {
