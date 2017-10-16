@@ -13,8 +13,31 @@ class Cancel extends API
      * 关闭
      *
      */
-    public function repeal($orig_order_num = null, $order_num = null, $out_order_num = null)
+    public function repeal(Order $order)
     {
+        $attributes = [
+            'version'    => Order::PAY_VERSION,
+            'charset'    => Order::CHARSET,
+            'signMethod' => Order::SIGNMETHOD,
+            'payType'    => Order::PAY_TYPE_B2C,
+            'transType'  => Order::FRONT_CLOSE_REQ_TRANSTYPE,
+            'merId'      => $this->merchant->mer_id,
+            'orderTime'  => date('YmdHis', time()),
+        ];
+
+        foreach ($attributes as $key => $value) {
+            $order->set($key, $value);
+        }
+
+        $subject = parent::request(parent::FRONT_CLOSE_REQ, $order->all());
+
+        parse_str($subject, $arr);
+
+        if (!parent::isValid(new Collection($arr))) {
+            throw new \Exception(' 签名验证失败');
+        }
+
+        return new Order($arr);
     }
 
     /**

@@ -38,6 +38,8 @@ class Order extends Attribute
     const REF_TRANSTYPE   = "02";    // 02-退款交易
     const REF_SERVICE_ID  = '0';     // 退款SERVICE ID
 
+    const FRONT_CLOSE_REQ_TRANSTYPE = "03";    // 03-关闭交易
+
     const BILL_DOWNLOAD_VERSION     = "2.0";     // 下载版本
     const BILL_DOWNLOAD_TRANSCODE01 = "F001";    // F001-对账单生成
     const BILL_DOWNLOAD_TRANSCODE02 = "F002";    // F002-对账单下载
@@ -72,6 +74,8 @@ class Order extends Attribute
         'refSplitAmount',
         'refId',
         'serviceId',
+        'merOrderid',
+        'bankNumber',
     ];
 
     /**
@@ -104,6 +108,8 @@ class Order extends Attribute
         'refSplitAmount'    => 'ref_split_amount',
         'refId'             => 'ref_id',
         'serviceId'         => 'service_id',
+        'merOrderid'        => 'mer_order_id',
+        'bankNumber'        => 'bank_number',
     ];
 
     /**

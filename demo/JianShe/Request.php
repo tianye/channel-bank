@@ -156,6 +156,24 @@ class Request
         var_export($return);
     }
 
+    //关闭订单接口
+    public function repeal($order_number, $mer_order_id, $qid, $bank_number = '991', $mer_reserved_1 = '', $mer_reserved_2 = '', $mer_reserved_3 = '')
+    {
+        $attributes = [
+            'order_number'   => $order_number,
+            'mer_order_id'   => $mer_order_id,
+            'qid'            => $qid,
+            'bank_number'    => $bank_number,
+            'mer_reserved_1' => $mer_reserved_1,
+            'mer_reserved_2' => $mer_reserved_2,
+            'mer_reserved_3' => $mer_reserved_3,
+        ];
+        $order      = new Order($attributes);
+
+        $return = self::$app->ccb_payment->Cancel()->repeal($order);
+
+        var_export($return);
+    }
 }
 
 $Application = new Request();
@@ -184,3 +202,10 @@ $order_amount   = '2';
 
 #$ref_id      = 'T002402017101616212883001449';
 #$Application->refundQuery($ref_id);
+
+$order_number   = $order_num;
+$mer_order_id   = '1508141492285596002438';
+$qid            = 'J014312017101616113291237602';
+$bank_number    = '991';
+$mer_reserved_1 = '电子类消费产品';
+$Application->repeal($order_number, $mer_order_id, $qid, $bank_number, $mer_reserved_1);

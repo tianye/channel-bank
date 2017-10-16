@@ -25,6 +25,9 @@ class API extends AbstractAPI
     const REFUND_PAY_URL   = "http://test.ezf123.com/jspt/payment/order-refund.action"; // 测试环境地址，正式投产时需使用清算平台统一分配的地址
     const REFUND_QUERY_URL = "http://test.ezf123.com/jspt_query/payment/back-refund-query.action";  // 测试环境地址，正式投产时需使用清算平台统一分配的地址
 
+    // 关闭订单
+    const  FRONT_CLOSE_REQ = 'https://www.ezf123.com/jspt/payment/frontCloseReq.action'; //测试环境地址，正式投产时需使用清算平台统一分配的地址
+
     //后台类交易地址
     const BACKTRANS_URL = "http://test.ezf123.com/jspt/payment/backTransReq.action";
 
