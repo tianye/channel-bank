@@ -106,7 +106,7 @@ class JsPay extends API
             'signMethod'        => Order::SIGNMETHOD,
             'payType'           => Order::PAY_TYPE_B2C,
             'transType'         => Order::PAY_TRANSTYPE,
-            'merId'             => '10001',
+            'merId'             => $this->merchant->mer_id,
             'orderTime'         => date('YmdHis', time()),
             'orderCurrency'     => Order::ORDERCURRENCY,
             'defaultBankNumber' => '992',

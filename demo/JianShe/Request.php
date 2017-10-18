@@ -19,8 +19,8 @@ class Request
             ],
 
             'ccb_payment' => [
-                'mer_id'   => '10001', // 此处为模拟联调商户号，正式投产时需使用清算平台分配的商户号
-                'sign_key' => '8888888888888', // 此处为模拟联调密钥，正式投产时需使用清算平台分配的密钥
+                'mer_id'   => '20065', // 此处为模拟联调商户号，正式投产时需使用清算平台分配的商户号
+                'sign_key' => 'Y127BGP49APC1B9G8SMTF6PUI1XFITPGFLGU5E4B3MJKX76U3A6U7XHMKMUL', // 此处为模拟联调密钥，正式投产时需使用清算平台分配的密钥
             ],
         ];
 
@@ -185,7 +185,7 @@ $order_amount   = '2';
 
 var_dump($order_num);
 
-#$Application->wxPay($order_num, $order_amount);
+$Application->wxPay($order_num, $order_amount);
 
 #$Application->wxQrPay($order_num, $order_amount);
 
@@ -193,16 +193,16 @@ var_dump($order_num);
 
 #$Application->aliQrPay($order_num, $order_amount);
 
-#$order_num = '1508141492285596002438';
+#$order_num = '1508224926887838004091';
 #$Application->query($order_num);
 
-$orderNumber  = '1508147957729848008837';
-$qid          = 'J014402017101617591841571656';
-$order_amount = '2';
-$Application->refund($order_num, $qid, $order_amount);
+#$orderNumber  = '1508225732980122006341';
+#$qid          = 'J014862017101715353358242911';
+#$order_amount = '2';
+#$Application->refund($order_num, $qid, $order_amount);
 
-#$ref_id      = 'T002402017101616212883001449';
-#$Application->refundQuery($ref_id);
+$ref_id      = 'T002442017101715535694578618';
+$Application->refundQuery($ref_id);
 
 //$order_number   = $order_num;
 //$mer_order_id   = '1508141492285596002438';
