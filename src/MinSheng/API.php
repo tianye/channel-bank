@@ -39,6 +39,10 @@ class API extends AbstractAPI
         $this->merchant = $merchant;
     }
 
+    public static function generate_sign($all, $sign_key)
+    {
+    }
+
     /**
      * Pay the order.
      *

@@ -185,11 +185,11 @@ $order_amount   = '2';
 
 var_dump($order_num);
 
-$Application->wxPay($order_num, $order_amount);
+#$Application->wxPay($order_num, $order_amount);
 
 #$Application->wxQrPay($order_num, $order_amount);
 
-#$Application->aliPay($order_num, $order_amount);
+$Application->aliPay($order_num, $order_amount);
 
 #$Application->aliQrPay($order_num, $order_amount);
 
@@ -201,8 +201,8 @@ $Application->wxPay($order_num, $order_amount);
 #$order_amount = '2';
 #$Application->refund($order_num, $qid, $order_amount);
 
-$ref_id      = 'T002442017101715535694578618';
-$Application->refundQuery($ref_id);
+#$ref_id      = 'T002442017101715535694578618';
+#$Application->refundQuery($ref_id);
 
 //$order_number   = $order_num;
 //$mer_order_id   = '1508141492285596002438';

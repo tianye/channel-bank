@@ -27,7 +27,7 @@ class JsPay extends API
             'merId'             => $this->merchant->mer_id,
             'orderTime'         => date('YmdHis', time()),
             'orderCurrency'     => Order::ORDERCURRENCY,
-            'defaultBankNumber' => '991',
+            'defaultBankNumber' => Order::BANK_WECHAT,
         ];
 
         foreach ($attributes as $key => $value) {
@@ -76,7 +76,7 @@ class JsPay extends API
             'merId'             => $this->merchant->mer_id,
             'orderTime'         => date('YmdHis', time()),
             'orderCurrency'     => Order::ORDERCURRENCY,
-            'defaultBankNumber' => '991',
+            'defaultBankNumber' => Order::BANK_WECHAT,
             'scence'            => 'WECHAT_QR',
         ];
 
@@ -109,7 +109,7 @@ class JsPay extends API
             'merId'             => $this->merchant->mer_id,
             'orderTime'         => date('YmdHis', time()),
             'orderCurrency'     => Order::ORDERCURRENCY,
-            'defaultBankNumber' => '992',
+            'defaultBankNumber' => Order::BANK_ALI,
         ];
 
         foreach ($attributes as $key => $value) {
@@ -156,7 +156,7 @@ HTML;
             'merId'             => $this->merchant->mer_id,
             'orderTime'         => date('YmdHis', time()),
             'orderCurrency'     => Order::ORDERCURRENCY,
-            'defaultBankNumber' => '992',
+            'defaultBankNumber' => Order::BANK_ALI,
             'scence'            => 'ALIPAY_QR',
         ];
 
@@ -169,5 +169,10 @@ HTML;
         parse_str($subject, $arr);
 
         return new Order($arr);
+    }
+
+    public function aliPaymentCode(Order $order)
+    {
+
     }
 }

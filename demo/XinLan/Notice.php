@@ -39,11 +39,11 @@ class Notice
             ]
         );
 
-        exit('SUCCESS');
         try {
             $response = self::$app->xinlan_payment->handleNotify(function (\ChannelBank\Support\Collection $notify, $successful) {
 
-                //返回值信息  var_dump($notify->all());
+                //返回值信息
+                var_dump($notify->all());
                 if ($successful) {
                     //TODO 支付成功
 

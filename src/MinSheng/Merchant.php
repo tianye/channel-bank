@@ -10,6 +10,7 @@ use ChannelBank\Support\Attribute;
  * @property string $version
  * @property string $mch_no
  * @property string $pri_key
+ * @property string $sign_key
  */
 class Merchant extends Attribute
 {

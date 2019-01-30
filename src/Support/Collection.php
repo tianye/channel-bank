@@ -276,7 +276,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *                           The string representation of the object.
      *                           </p>
      *
-     * @return mixed|void
+     * @return mixed
      */
     public function unserialize($serialized)
     {

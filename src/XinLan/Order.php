@@ -63,7 +63,6 @@ class Order extends Attribute
         'merchOrderId'  => 'merch_order_id',
         'merchName'     => 'merch_name',
         'successUrl'    => 'success_url',
-        'clientIP'      => 'client_ip',
     ];
 
     /**

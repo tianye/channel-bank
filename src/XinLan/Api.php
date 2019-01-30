@@ -1,9 +1,7 @@
 <?php
+
 namespace ChannelBank\XinLan;
 
-use ChannelBank\Core\Exceptions\FaultException;
-use GuzzleHttp\Exception\ServerException;
-use HttpException;
 use Psr\Http\Message\ResponseInterface;
 use ChannelBank\Core\AbstractAPI;
 use ChannelBank\Support\Collection;

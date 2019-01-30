@@ -49,6 +49,9 @@ class Order extends Attribute
     const SIGNMETHOD    = "MD5";    // 加密方式
     const ORDERCURRENCY = "156";    // 交易币种
 
+    const BANK_WECHAT = '991'; //微信支付
+    const BANK_ALI    = '992'; //微信支付
+
     protected $attributes = [
         'backEndUrl',
         'frontEndUrl',
